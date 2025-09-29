@@ -10,6 +10,9 @@ interface ButtonProps {
   size?: 'sm' | 'md' | 'lg';
   onClick?: () => void;
   className?: string;
+  style?: React.CSSProperties;
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 export default function Button({ 
@@ -19,7 +22,10 @@ export default function Button({
   color = 'blue', 
   size = 'md',
   onClick,
-  className = ''
+  className = '',
+  style,
+  disabled = false,
+  type = 'button'
 }: ButtonProps) {
   const colors = {
     blue: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
@@ -108,11 +114,13 @@ export default function Button({
 
   return (
     <button
-      style={styles}
+      type={type}
+      style={{...styles, ...style}}
       className={className}
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      disabled={disabled}
     >
       {children}
     </button>

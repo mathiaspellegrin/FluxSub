@@ -71,12 +71,12 @@ export function useAutoConnect(onWalletConnect: (name: string, account: string, 
                   return;
                 }
 
-                // Try to get the currently selected accounts without prompting.
-                let accounts = await providerInstance.request({ method: 'eth_accounts' });
-                // If no accounts returned, check if the provider instance exposes a selectedAddress.
-                if ((!accounts || accounts.length === 0) && providerInstance.selectedAddress) {
-                  accounts = [providerInstance.selectedAddress];
-                }
+            // Try to get the currently selected accounts without prompting.
+            let accounts: string[] = await providerInstance.request({ method: 'eth_accounts' }) as string[];
+            // If no accounts returned, check if the provider instance exposes a selectedAddress.
+            if ((!accounts || accounts.length === 0) && providerInstance.selectedAddress) {
+              accounts = [providerInstance.selectedAddress];
+            }
                 
                 if (accounts && accounts[0]) {
                   console.log('useAutoConnect: Auto-connecting wallet:', providerDetail.info.name);

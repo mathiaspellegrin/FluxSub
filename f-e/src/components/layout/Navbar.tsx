@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import SimpleConnectButton from '../SimpleConnectButton';
 
 export default function Navbar() {
@@ -32,7 +33,7 @@ export default function Navbar() {
         alignItems: 'center'
       }}>
         {/* Logo */}
-        <a href="/" style={{
+        <Link href="/" style={{
           textDecoration: 'none',
           fontSize: '1.5rem',
           fontWeight: '700',
@@ -42,7 +43,7 @@ export default function Navbar() {
           WebkitTextFillColor: 'transparent'
         }}>
           FluxSub
-        </a>
+        </Link>
 
         {/* Navigation Links */}
         <div style={{

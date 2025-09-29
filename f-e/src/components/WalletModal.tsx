@@ -82,14 +82,14 @@ const WalletModal = ({ isOpen, onClose, onWalletConnect }: WalletModalProps) => 
         }
 
         // Try to get the currently selected accounts without prompting.
-        let accounts = await providerInstance.request({ method: 'eth_accounts' });
+        let accounts: string[] = await providerInstance.request({ method: 'eth_accounts' }) as string[];
         // If no accounts returned, check if the provider instance exposes a selectedAddress.
         if ((!accounts || accounts.length === 0) && providerInstance.selectedAddress) {
           accounts = [providerInstance.selectedAddress];
         }
         // If still empty, request accounts (this will prompt the user).
         if (!accounts || accounts.length === 0) {
-          accounts = await providerInstance.request({ method: 'eth_requestAccounts' });
+          accounts = await providerInstance.request({ method: 'eth_requestAccounts' }) as string[];
         }
         
         if (accounts && accounts[0]) {

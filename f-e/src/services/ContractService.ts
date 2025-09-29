@@ -142,9 +142,9 @@ class ContractService {
       console.log('Transaction confirmed:', receipt);
       
       // Get the subscription ID from the event
-      const event = receipt.logs.find(log => {
+      const event = receipt.logs.find((log: any) => {
         try {
-          const parsed = this.fluxSubContract!.interface.parseLog(log);
+          const parsed = this.fluxSubContract!.interface.parseLog(log); 
           return parsed?.name === 'SubscriptionCreated';
         } catch {
           return false;
@@ -184,9 +184,9 @@ class ContractService {
       console.log('Subscription confirmed:', receipt);
       
       // Get the user subscription ID from the event
-      const event = receipt.logs.find(log => {
+      const event = receipt.logs.find((log: any) => {
         try {
-          const parsed = this.fluxSubContract!.interface.parseLog(log);
+          const parsed = this.fluxSubContract!.interface.parseLog(log); 
           return parsed?.name === 'UserSubscribed';
         } catch {
           return false;
@@ -303,6 +303,7 @@ class ContractService {
       const subscription = await this.fluxSubContract!.getUserSubscription(userSubscriptionId);
       
       return {
+        userSubscriptionId: userSubscriptionId,
         subscriptionId: Number(subscription.subscriptionId),
         user: subscription.user,
         merchant: subscription.merchant,

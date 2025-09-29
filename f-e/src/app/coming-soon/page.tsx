@@ -57,7 +57,7 @@ export default function ComingSoonPage() {
           lineHeight: '1.6',
           maxWidth: '600px'
         }}>
-          We're working hard to bring you amazing new features and content. 
+          We&apos;re working hard to bring you amazing new features and content. 
           This page is currently under development and will be available soon.
         </p>
 
@@ -246,7 +246,7 @@ export default function ComingSoonPage() {
             margin: '0.5rem 0 0 0',
             fontFamily: 'var(--font-geist-sans)'
           }}>
-            We're making great progress! Stay tuned for updates.
+            We&apos;re making great progress! Stay tuned for updates.
           </p>
         </div>
       </div>
