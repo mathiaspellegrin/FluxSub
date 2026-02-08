@@ -1,41 +1,29 @@
 # FluxSub Smart Contracts
 
-## 📋 Contract Files
+Deployed addresses live in [../docs/addresses.md](../docs/addresses.md) and [CONTRACT_ADDRESSES.md](CONTRACT_ADDRESSES.md). Check those when you need the real numbers.
 
-- **`FluxSub.sol`** - Main subscription contract
-- **`FluxSubFactory.sol`** - Factory contract for creating multiple instances
+## Contract files
 
-## 🎯 Key Features
+- **`FluxSub.sol`** — The main subscription contract. Where the logic lives.
+- **`FluxSubFactory.sol`** — Factory that spins up multiple FluxSub instances. One place to create them all.
 
-### For Merchants
-- **Create Subscription Services** with unique IDs
-- **Shareable Links** - Get subscription ID to share with customers
-- **Member Management** - View all subscribers sorted by subscription date
-- **Revenue Tracking** - Monitor subscription revenue and growth
+## What’s in it for merchants
 
-### For Users
-- **Easy Subscription** - Subscribe using just the subscription ID
-- **Auto-funding** - Fund subscriptions with initial CFX payment
-- **Balance Management** - Add CFX funds to maintain active subscriptions
-- **Cancellation** - Cancel anytime with automatic refunds
+Create subscription services with unique IDs. Get a shareable link—hand the ID to customers and you’re good. Member management: view all subscribers, sorted by subscription date. Revenue tracking’s there too; you can see how things are growing.
 
-## 🚀 How It Works
+## What’s in it for users
 
-### Merchant Flow
-1. **Create Service**: `createSubscriptionService(name, description, amount, period)`
-2. **Get ID**: Contract returns unique `subscriptionId`
-3. **Share Link**: `https://fluxsub.com/subscribe/{subscriptionId}`
-4. **View Members**: `getSubscriptionMembers(subscriptionId)` - sorted by date
+Subscribe with just the subscription ID. Fund with CFX upfront (or add more later). Balance management—top up when you need to. Cancel anytime; refunds happen automatically. No hoops to jump through.
 
-### User Flow
-1. **Get Link**: From merchant (contains subscriptionId)
-2. **Subscribe**: `subscribe(subscriptionId, initialFunding)`
-3. **Fund**: `fundSubscription(userSubscriptionId)`
-4. **Cancel**: `cancelSubscription(userSubscriptionId)` - auto refund
+## How it works
 
-## 📊 Contract Addresses
+**Merchant flow:** Create a service with `createSubscriptionService(name, description, amount, period)`. Contract gives you a unique `subscriptionId`. Share something like `https://fluxsub.com/subscribe/{subscriptionId}`. View members with `getSubscriptionMembers(subscriptionId)`—they’re sorted by date.
 
-Update these addresses in your frontend after deployment:
+**User flow:** Get the link from the merchant (it’s got the subscriptionId). Call `subscribe(subscriptionId, initialFunding)`. Add funds with `fundSubscription(userSubscriptionId)`. Cancel with `cancelSubscription(userSubscriptionId)`—auto refund.
+
+## Contract addresses
+
+Update these in your frontend after you deploy. (Or use the ones already deployed—see addresses.md.)
 
 ### Testnet
 ```
@@ -45,23 +33,14 @@ FluxSub: [TO_BE_DEPLOYED]
 
 ### Mainnet
 ```
-FluxSubFactory: [TO_BE_DEPLOYED]
-FluxSub: [TO_BE_DEPLOYED]
+FluxSubFactory: 0xb62B847c8F00d15b0d05A5902B6C995B2E6B87dC
+FluxSub: 0xe475f7E4caC5ED0229dbc0e040a88A09c625dF74
 ```
 
-## 🔧 Frontend Integration
+## Frontend integration
 
-The contracts are designed to work with your existing frontend:
+The contracts are built to work with the existing frontend. Subscription IDs line up with the frontend’s creation flow. Member listing supports the merchant dashboard. Date sorting gives you chronological member lists. Balance tracking matches what the frontend shows. So—no surprises there.
 
-- **Subscription IDs** match the frontend's subscription creation flow
-- **Member listing** supports the merchant dashboard's member management
-- **Date sorting** provides chronological member lists
-- **Balance tracking** matches the frontend's subscription display
+## Notes
 
-## 📝 Notes
-
-- Contracts use OpenZeppelin for security (ReentrancyGuard, Pausable, Ownable)
-- All amounts are in wei (use ethers.utils.parseEther() for CFX amounts)
-- Members are automatically sorted by subscription date
-- Automatic refunds on cancellation
-- Pause/resume functionality included
+Contracts use OpenZeppelin for security (ReentrancyGuard, Pausable, Ownable). Amounts are in wei—use ethers.utils.parseEther() for CFX. Members are sorted by subscription date automatically. Cancellation triggers a refund. Pause/resume is included.

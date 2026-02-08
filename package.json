@@ -1,0 +1,14 @@
+{
+  "name": "fluxsub",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Decentralized subscription management on Conflux",
+  "repository": "github:mathiaspellegrin/FluxSub",
+  "homepage": "https://flux-sub.vercel.app",
+  "scripts": {
+    "dev": "cd f-e && npm run dev",
+    "build": "cd f-e && npm run build",
+    "start": "cd f-e && npm start",
+    "lint": "cd f-e && npm run lint"
+  }
+}
