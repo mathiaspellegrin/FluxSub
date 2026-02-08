@@ -2,15 +2,15 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Subscriptions, but on-chain. We're talking recurring payments on Conflux—merchants spin up services, users pay in CFX, and everything’s out in the open. No black box billing.
+Decentralized subscription management on Conflux: merchants create recurring services, users pay in CFX, with on-chain transparency and control.
 
 ## Why it exists
 
-Recurring payments? Usually it’s some custodian holding the reins and you’re left guessing what’s actually happening with your money. FluxSub flips that. State lives on-chain. So do the funds. Terms, balances—you can verify it all yourself. Merchants get subscription IDs they can actually share; they charge when it’s due. Users fund, pause, or cancel and get refunds when they do. Built for Conflux (Core and eSpace)—low fees, EVM-compatible. That’s the idea, anyway.
+Recurring payments today rely on custodial processors and opaque billing. FluxSub puts subscription state and funds on-chain so terms and balances are verifiable. Merchants get shareable subscription IDs and can charge when due; users can fund, pause, or cancel and receive refunds. Built for Conflux (Core and eSpace) to leverage low fees and EVM compatibility.
 
 ## What it does
 
-**Merchant side:** Create a subscription service—name, description, amount, period. You get an ID. Share a link. List members by date. Charge when it’s due.
+**Merchant side:** Create a subscription service (name, description, amount, period). Get a subscription ID, share a link, list members by date, charge when due.
 
 **User side:** Subscribe by ID or link. Fund with CFX. See your balance and next charge. Cancel whenever; refund happens automatically.
 
@@ -22,9 +22,9 @@ Recurring payments? Usually it’s some custodian holding the reins and you’re
 
 **Frontend** (`f-e/`): Next.js 15, React 19, TypeScript, ethers.js. Wallet context, contract service, ABIs in `f-e/abi/`.
 
-**Contracts** (`smart-contracts/`): FluxSub.sol does the subscription logic. FluxSubFactory.sol deploys FluxSub. OpenZeppelin’s ReentrancyGuard, Pausable, Ownable—you know the drill.
+**Contracts** (`smart-contracts/`): FluxSub.sol (subscription logic), FluxSubFactory.sol (deploys FluxSub). OpenZeppelin ReentrancyGuard, Pausable, Ownable.
 
-**Dataflow:** Browser → wallet → Conflux RPC → FluxSub / FluxSubFactory. No backend server. That’s it.
+**Dataflow:** Browser → wallet → Conflux RPC → FluxSub / FluxSubFactory. No backend server.
 
 ```
 [User/Merchant] → [Wallet] → [Conflux RPC] → [FluxSub / FluxSubFactory]
@@ -34,7 +34,7 @@ More detail: [docs/architecture.md](docs/architecture.md).
 
 ## Quickstart
 
-**You’ll need:** Node.js 18+, npm, and a Conflux-capable wallet (Fluent, MetaMask with Conflux, etc.).
+**Requirements:** Node.js 18+, npm, a Conflux-capable wallet (e.g. Fluent, MetaMask with Conflux).
 
 1. **Clone and install**
    ```bash
@@ -42,7 +42,7 @@ More detail: [docs/architecture.md](docs/architecture.md).
    cd FluxSub
    cd f-e && npm install
    ```
-2. **Optional:** Copy `.env.example` to `.env` and tweak if you add env-based config later.
+2. **Optional:** `cp .env.example .env` and adjust if you add env-based config later.
 3. **Run (dev)**
    ```bash
    # From repo root
@@ -50,27 +50,27 @@ More detail: [docs/architecture.md](docs/architecture.md).
    # Or from f-e
    cd f-e && npm run dev
    ```
-   Point your browser at http://localhost:3000.
-4. **Test:** No automated test suite in the repo yet. Do it by hand—connect wallet, create a service (merchant), subscribe (user), charge, cancel. Use testnet first, obviously.
-5. **Something broken?** Wrong network is the usual culprit. Set the right one in your wallet and in `f-e/src/config/contracts.ts` (`CURRENT_NETWORK`). See [docs/troubleshooting.md](docs/troubleshooting.md).
+   Open http://localhost:3000.
+4. **Test:** No automated test suite in repo yet. Manually: connect wallet, create a service (merchant), subscribe (user), charge/cancel. Use testnet first.
+5. **Troubleshooting:** Wrong network → set correct network in wallet and in `f-e/src/config/contracts.ts` (`CURRENT_NETWORK`). See [docs/troubleshooting.md](docs/troubleshooting.md).
 
 ## Config
 
-Contract addresses, RPC, explorer URLs—all in `f-e/src/config/contracts.ts`. No env vars required for local dev. Full env and config: [docs/config.md](docs/config.md).
+Contract addresses and RPC/explorer URLs are in `f-e/src/config/contracts.ts`. No required env vars for local dev. Full env and config: [docs/config.md](docs/config.md).
 
 ## Deployment
 
-Frontend: `npm run build` (from root or `f-e/`), then `npm start` or ship the `f-e` app wherever you host. Contracts are already deployed on Conflux; see [docs/contracts.md](docs/contracts.md) and [docs/addresses.md](docs/addresses.md). Deployment nitty-gritty: [docs/contracts.md](docs/contracts.md#deployment-for-maintainers).
+Frontend: build with `npm run build` (from root or `f-e/`), then run `npm start` or deploy the `f-e` app to your host. Contracts are already deployed on Conflux; see [docs/contracts.md](docs/contracts.md) and [docs/addresses.md](docs/addresses.md). Deployment details: [docs/contracts.md](docs/contracts.md#deployment-for-maintainers).
 
 ## Security notes
 
-**Keys:** We don’t collect or store private keys. Signing happens in the user’s wallet.
+**Keys:** We do not collect or store private keys; all signing is in the user's wallet.
 
-**Contracts:** Owner/admin keys—keep them offline. Use testnet and test keys for dev.
+**Contracts:** Owner/admin keys should be kept offline; use testnet and test keys for dev.
 
-**Scope:** Smart contracts and frontend only. No relayer, no backend secrets in this repo.
+**Scope:** Smart contracts and frontend only; no relayer or backend secrets in repo.
 
-Responsible disclosure and the rest: [SECURITY.md](SECURITY.md).
+Responsible disclosure and more: [SECURITY.md](SECURITY.md).
 
 ## Proof / Demo
 
@@ -84,7 +84,9 @@ How to reproduce: [docs/demo.md](docs/demo.md).
 
 **Prototype.**
 
-What’s solid: contracts are deployed on Conflux mainnet/eSpace; the frontend covers merchant and user flows—subscribe by ID or link, charge, cancel, refund. What’s next: tests (unit and integration), and hopefully a formal audit at some point.
+Core subscription logic and merchant/user flows are implemented on-chain. Contracts deployed on Conflux mainnet/eSpace; frontend supports subscribe by ID/link, charge, cancel, refund.
+
+**Missing:** Automated tests and third-party audit.
 
 ## Documentation
 

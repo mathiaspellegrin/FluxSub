@@ -41,6 +41,18 @@ FluxSub: 0xe475f7E4caC5ED0229dbc0e040a88A09c625dF74
 
 The contracts are built to work with the existing frontend. Subscription IDs line up with the frontend’s creation flow. Member listing supports the merchant dashboard. Date sorting gives you chronological member lists. Balance tracking matches what the frontend shows. So—no surprises there.
 
+## Testing
+
+Minimal unit tests (subscribe, charge, cancel/refund) live in `test/FluxSub.t.sol`. Uses [Foundry](https://book.getfoundry.sh/).
+
+From `smart-contracts/`:
+
+```bash
+forge install foundry-rs/forge-std --no-commit
+forge install OpenZeppelin/openzeppelin-contracts --no-commit
+forge test
+```
+
 ## Notes
 
 Contracts use OpenZeppelin for security (ReentrancyGuard, Pausable, Ownable). Amounts are in wei—use ethers.utils.parseEther() for CFX. Members are sorted by subscription date automatically. Cancellation triggers a refund. Pause/resume is included.
