@@ -4,7 +4,7 @@
 
 **Code:** Fork the [repo](https://github.com/mathiaspellegrin/FluxSub), branch, make your change, test it, then open a PR. Frontend is TypeScript; contracts follow Solidity style and OpenZeppelin patterns. Nothing fancy.
 
-**Commits:** Clear messages go a long way. We like `feat: ...`, `fix: ...`, `docs: ...`—you get the idea.
+**Commits:** Clear messages go a long way. We like `feat: ...`, `fix: ...`, `docs: ...`—you get the idea. Avoid pushing “wip” to main; keep main build green.
 
 **Setup:** `cd f-e && npm install`, then `npm run dev` (or `npm run dev` from the repo root). See [README](README.md#quickstart) and [docs/running.md](docs/running.md).
 
